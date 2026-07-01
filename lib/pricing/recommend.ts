@@ -1,6 +1,7 @@
 import { computePrice, type PriceBreakdown } from "./engine";
 import type { PricingConfig } from "./config";
-import { addDaysStr, forwardOccupancy, type AvailabilityStatus } from "./occupancy";
+import { addDaysStr, daysBetween } from "../dates";
+import { forwardOccupancy, type AvailabilityStatus } from "./occupancy";
 
 export interface UnitEconomics {
   basePrice: number;
@@ -35,12 +36,6 @@ export interface DailyRecommendation {
 
 const DEFAULT_OCCUPANCY_WINDOW = 30;
 const DEFAULT_CEILING_FACTOR = 4;
-
-function daysBetween(from: string, to: string): number {
-  const a = new Date(from + "T12:00:00").getTime();
-  const b = new Date(to + "T12:00:00").getTime();
-  return Math.round((b - a) / 86_400_000);
-}
 
 function maxEventMultiplier(events: ManualEvent[], date: string): number {
   let m = 1;

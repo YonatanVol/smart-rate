@@ -1,12 +1,9 @@
+import { addDaysStr } from "../dates";
+
 /** Per-night availability status (mirrors the `availability_status` DB enum). */
 export type AvailabilityStatus = "open" | "booked" | "blocked";
 
-/** Add `n` days to a "YYYY-MM-DD" string (noon-anchored, DST-safe). */
-export function addDaysStr(d: string, n: number): string {
-  const dt = new Date(d + "T12:00:00");
-  dt.setDate(dt.getDate() + n);
-  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, "0")}-${String(dt.getDate()).padStart(2, "0")}`;
-}
+export { addDaysStr };
 
 /**
  * Forward occupancy (0..1) over the window [from, from+windowDays): booked nights
