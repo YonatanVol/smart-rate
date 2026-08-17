@@ -1,0 +1,42 @@
+name: Tap Connect APK
+
+on:
+  push:
+    paths:
+      - "tap-connect/**"
+      - ".github/workflows/tap-connect-apk.yml"
+  pull_request:
+    paths:
+      - "tap-connect/**"
+      - ".github/workflows/tap-connect-apk.yml"
+  workflow_dispatch:
+
+jobs:
+  debug-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: "platforms;android-35 build-tools;35.0.0 platform-tools"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          build-root-directory: tap-connect
+
+      - name: Assemble debug APK
+        working-directory: tap-connect
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: tap-connect-debug-apk
+          path: tap-connect/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
