@@ -1,7 +1,10 @@
 name: Tap Connect APK
 
 on:
+  # Branch pushes are covered by the pull_request trigger; limiting push to main
+  # keeps a PR from building the same commit twice.
   push:
+    branches: [main]
     paths:
       - "tap-connect/**"
       - ".github/workflows/tap-connect-apk.yml"
