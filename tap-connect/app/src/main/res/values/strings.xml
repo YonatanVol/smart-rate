@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Tap Connect</string>
+    <string name="default_device_label">EAZ100</string>
+
+    <string name="shortcut_connect">Connect earphones</string>
+    <string name="shortcut_pick">Choose device</string>
+
+    <string name="connecting">Connecting to %1$s…</string>
+    <string name="connected">%1$s connected</string>
+    <string name="already_connected">%1$s is already connected</string>
+    <string name="nudged">Waking %1$s — it should connect in a moment</string>
+    <string name="failed">Could not connect %1$s</string>
+    <string name="bluetooth_off">Bluetooth is off</string>
+    <string name="no_bluetooth">No Bluetooth on this device</string>
+    <string name="need_permission">Tap Connect needs the Nearby devices permission</string>
+
+    <string name="picker_title">Choose your device</string>
+    <string name="picker_subtitle">The home screen icon will connect whichever paired device you
+        pick here.</string>
+    <string name="picker_empty">No paired devices yet. Pair your earphones in Bluetooth settings
+        first, then come back. Tap here to open settings.</string>
+    <string name="unnamed_device">Unnamed device</string>
+    <string name="device_saved">Saved %1$s</string>
+
+    <string name="widget_label">Connect earphones</string>
+    <string name="widget_description">One tap to connect your saved Bluetooth audio device.</string>
+</resources>
