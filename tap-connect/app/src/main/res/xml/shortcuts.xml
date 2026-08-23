@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutId="pick-device"
+        android:shortcutLongLabel="@string/picker_title"
+        android:shortcutShortLabel="@string/shortcut_pick">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.yonatan.tapconnect.DevicePickerActivity"
+            android:targetPackage="com.yonatan.tapconnect" />
+    </shortcut>
+</shortcuts>

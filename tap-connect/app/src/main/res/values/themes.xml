@@ -1,0 +1,14 @@
+<resources>
+
+    <style name="Theme.TapConnect" parent="@android:style/Theme.DeviceDefault.Light" />
+
+    <!-- Used by the launcher activity: no chrome, nothing drawn, just the toast. -->
+    <style name="Theme.TapConnect.Invisible" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>

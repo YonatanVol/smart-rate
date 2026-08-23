@@ -20,6 +20,13 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Also in this repo
+
+[`tap-connect/`](tap-connect/README.md) is an unrelated standalone Android app — a one-tap
+home-screen shortcut that connects a paired Bluetooth audio device. It has its own README, its own
+Gradle build, and its own CI workflow (`.github/workflows/tap-connect-apk.yml`); it shares nothing
+with the Next.js app here.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
