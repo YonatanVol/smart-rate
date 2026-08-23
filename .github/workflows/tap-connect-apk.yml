@@ -1,18 +1,16 @@
 name: Tap Connect APK
 
+# Push-only: a pull_request trigger as well would build every branch commit twice,
+# and PR-triggered runs cannot publish the release below.
 on:
-  # Branch pushes are covered by the pull_request trigger; limiting push to main
-  # keeps a PR from building the same commit twice.
   push:
-    branches: [main]
-    paths:
-      - "tap-connect/**"
-      - ".github/workflows/tap-connect-apk.yml"
-  pull_request:
     paths:
       - "tap-connect/**"
       - ".github/workflows/tap-connect-apk.yml"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   debug-apk:
@@ -37,9 +35,28 @@ jobs:
         working-directory: tap-connect
         run: ./gradlew --no-daemon assembleDebug
 
+      - name: Name the APK for humans
+        run: cp tap-connect/app/build/outputs/apk/debug/app-debug.apk tap-connect-debug.apk
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: tap-connect-debug-apk
-          path: tap-connect/app/build/outputs/apk/debug/app-debug.apk
+          path: tap-connect-debug.apk
           if-no-files-found: error
+
+      # A prerelease is the only channel a phone can install from in one step:
+      # tap the .apk link, allow unknown apps, done. No sign-in, no unzip.
+      - name: Publish dev prerelease
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete tap-connect-dev --yes --cleanup-tag || true
+          gh release create tap-connect-dev \
+            --prerelease \
+            --target "$GITHUB_SHA" \
+            --title "Tap Connect (dev build)" \
+            --notes "One-tap Bluetooth connect for a saved audio device. Debug build of \`tap-connect/\` at ${GITHUB_SHA:0:7}.
+
+          Install: tap \`tap-connect-debug.apk\` below, allow installing unknown apps when One UI asks, then open **Tap Connect** once and grant **Nearby devices**. Add it to the home screen from the Apps screen (long-press -> Add to Home)." \
+            tap-connect-debug.apk

@@ -44,10 +44,12 @@ No Android Studio needed. Every push that touches `tap-connect/**` builds a debu
 (`.github/workflows/tap-connect-apk.yml`, at the repository root — GitHub only reads workflows from
 there):
 
-1. Open the repo's **Actions** tab → the latest **Build APK** run → download the
-   `tap-connect-debug-apk` artifact.
-2. Unzip it on your phone and open `app-debug.apk`. One UI will ask to allow installing unknown
-   apps for whichever app you opened it from — allow it.
+1. On the phone, open the repo's **Releases** → **Tap Connect (dev build)** and tap
+   `tap-connect-debug.apk`. Every build republishes that prerelease, so the link is stable.
+   (The same APK is also an Actions artifact on each run, but that one is a zip and needs a
+   signed-in browser — the release is the one-step path.)
+2. One UI will ask to allow installing unknown apps for whichever app you tapped the link from —
+   allow it, then install.
 3. Launch **Tap Connect** once. Grant **Nearby devices** when asked.
 4. If your EAZ100 is already paired, the first tap finds it by name and connects. Otherwise a
    picker appears — choose it once and it is remembered.
