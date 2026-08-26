@@ -1,12 +1,67 @@
 @import "tailwindcss";
 
+/* Theme is an explicit attribute so the toggle can override the OS preference. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #18181b;
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --surface-2: #f2efea;
+  --ink: #1c1f23;
+  --ink-2: #5c6169;
+  --ink-3: #949aa1;
+  --line: #e6e3de;
+  --accent: #2f8f7d;
+  --accent-ink: #ffffff;
+  /* Price direction: one hue up, one hue down — deliberately not a rainbow. */
+  --up: #2f8f7d;
+  --down: #b07f4a;
+  --holiday: #7c6cb0;
+}
+
+[data-theme="dark"] {
+  --bg: #131619;
+  --surface: #191d21;
+  --surface-2: #212629;
+  --ink: #eceff2;
+  --ink-2: #9aa2aa;
+  --ink-3: #6b747c;
+  --line: #2a3035;
+  --accent: #4cb3a0;
+  --accent-ink: #08110f;
+  --up: #4cb3a0;
+  --down: #c9975e;
+  --holiday: #9a8ad0;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-holiday: var(--holiday);
+  --font-sans: var(--font-assistant), system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Money and dates must not reflow as digits change. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Signed amounts are bidi-neutral; isolate them so "+₪151" never flips in RTL. */
+.num-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
 }
