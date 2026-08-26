@@ -3,8 +3,6 @@ import { addDaysStr } from "../dates";
 /** Per-night availability status (mirrors the `availability_status` DB enum). */
 export type AvailabilityStatus = "open" | "booked" | "blocked";
 
-export { addDaysStr };
-
 /**
  * Forward occupancy (0..1) over the window [from, from+windowDays): booked nights
  * ÷ *sellable* nights (open + booked). Owner-blocked nights are excluded from the

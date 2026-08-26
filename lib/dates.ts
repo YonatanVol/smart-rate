@@ -22,3 +22,17 @@ export function dateRange(startInclusive: string, endExclusive: string): string[
   for (let d = startInclusive; d < endExclusive; d = addDaysStr(d, 1)) out.push(d);
   return out;
 }
+
+/**
+ * Today's date in a given IANA zone as "YYYY-MM-DD" (en-CA formats as ISO).
+ * Defaults to Israel: the product prices an Israeli calendar, and pinning the
+ * zone also keeps the server and client from disagreeing about "today".
+ */
+export function todayInTimeZone(timeZone = "Asia/Jerusalem"): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+}
