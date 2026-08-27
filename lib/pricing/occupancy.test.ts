@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { forwardOccupancy, addDaysStr, type AvailabilityStatus } from "./occupancy";
+import { forwardOccupancy, type AvailabilityStatus } from "./occupancy";
+import { addDaysStr } from "../dates";
 
 function m(entries: [string, AvailabilityStatus][]): Map<string, AvailabilityStatus> {
   return new Map(entries);

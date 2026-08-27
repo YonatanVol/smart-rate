@@ -18,7 +18,7 @@ test("Passover (major holiday) lifts the price above a plain weekday", () => {
   const ordinary = computePrice({ ...baseInput, date: new Date(2026, 2, 18) });
   assert.ok(passover.multipliers.event > 1, "event multiplier should apply on Pesach");
   assert.ok(passover.recommended > ordinary.recommended);
-  assert.ok(passover.holidayNames.some((n) => /Pesach/i.test(n)));
+  assert.ok(passover.holidayNames.some((n) => n.includes("פסח")), "holiday names render in Hebrew");
 });
 
 test("Friday night prices higher than Wednesday night (Israeli week shape)", () => {

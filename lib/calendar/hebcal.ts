@@ -1,4 +1,18 @@
-import { HDate, HebrewCalendar, flags } from "@hebcal/core";
+import { HDate, HebrewCalendar, flags, type Event } from "@hebcal/core";
+
+/**
+ * Holiday names for display. This is a Hebrew-first product, so the Hebrew
+ * rendering is the name — "he-x-NoNikud" drops the vowel points, which is what
+ * reads correctly in UI. Falls back to the English description if a given event
+ * has no Hebrew rendering.
+ */
+function hebrewName(e: Event): string {
+  try {
+    return e.render("he-x-NoNikud") || e.getDesc();
+  } catch {
+    return e.getDesc();
+  }
+}
 
 /** Demand tier for a Jewish-calendar holiday, ordered weakest → strongest. */
 export type HolidayTier = "none" | "minor" | "modern" | "cholHamoed" | "major";
@@ -28,7 +42,7 @@ export function getHolidayInfo(date: Date): HolidayInfo {
   const names: string[] = [];
 
   for (const e of events) {
-    names.push(e.getDesc());
+    names.push(hebrewName(e));
     const cats = e.getCategories();
     const f = e.getFlags();
 
